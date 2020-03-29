@@ -6,13 +6,39 @@ export class ResponseDataArraySpec {
   meta: ResponseDataArraySpecMeta = new ResponseDataArraySpecMeta();
 }
 
-type ResponseDataArraySpecColumn  = Array<string | number>;
+export class ResponseDataArraySpecJSON {
+  columns: ResponseDataArraySpecColumn[] = [];
+  types: DynamicObject = {};
+  names: DynamicObject = {};
+  colors: DynamicObject = {};
+  meta: ResponseDataArraySpecMeta = new ResponseDataArraySpecMeta();
+
+  constructor(
+      columns: ResponseDataArraySpecColumn[],
+      types: DynamicObject,
+      names: DynamicObject,
+      colors: DynamicObject,
+      meta: ResponseDataArraySpecMeta,
+  ) {
+    this.columns = columns;
+    this.types = types;
+    this.names = names;
+    this.colors = colors;
+    this.meta = meta;
+  }
+}
+
+type DynamicObject = {
+  [key: string]: string;
+}
+
+type ResponseDataArraySpecColumn = Array<string | number>;
 
 class ResponseDataArraySpecMeta {
   channels: number = 0;
   samples: number = 0;
-  frequency: number = 0;
-  startTime: string = '';
-  endTime: string = '';
+  sampleRate: number = 0;
+  startTime: Date = new Date();
+  endTime: Date = new Date();
   recordingLength: string = '';
 }
